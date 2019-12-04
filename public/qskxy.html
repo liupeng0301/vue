@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>发布规则</title>
+		<script>
+			;
+			(function(designWidth, maxWidth) {
+				var doc = document,
+					win = window,
+					docEl = doc.documentElement,
+					remStyle = document.createElement("style"),
+					tid;
+		
+				function refreshRem() {
+					var width = docEl.getBoundingClientRect().width;
+					maxWidth = maxWidth || 540;
+					width > maxWidth && (width = maxWidth);
+					var rem = width * 100 / designWidth;
+					remStyle.innerHTML = 'html{font-size:' + rem + 'px;}';
+				}
+		
+				if (docEl.firstElementChild) {
+					docEl.firstElementChild.appendChild(remStyle);
+				} else {
+					var wrap = doc.createElement("div");
+					wrap.appendChild(remStyle);
+					doc.write(wrap.innerHTML);
+					wrap = null;
+				}
+				//要等 wiewport 设置好后才能执行 refreshRem，不然 refreshRem 会执行2次；
+				refreshRem();
+		
+				win.addEventListener("resize", function() {
+					clearTimeout(tid); //防止执行两次
+					tid = setTimeout(refreshRem, 300);
+				}, false);
+		
+				win.addEventListener("pageshow", function(e) {
+					if (e.persisted) { // 浏览器后退的时候重新计算
+						clearTimeout(tid);
+						tid = setTimeout(refreshRem, 300);
+					}
+				}, false);
+		
+				if (doc.readyState === "complete") {
+					doc.body.style.fontSize = "16px";
+				} else {
+					doc.addEventListener("DOMContentLoaded", function(e) {
+						doc.body.style.fontSize = "16px";
+					}, false);
+				}
+			})(750, 750);
+		</script>
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+			}
+
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+				font-family: '微软雅黑';
+			}
+			.zhanwei{
+				width: 100%;
+				height: .2rem;
+				background: #F5F5F5;
+			}
+			.kongge{
+				text-indent:2em;
+			}
+			.home_big {
+				width: 90%;
+				line-height: .55rem;
+				text-align: justify;
+				margin: .2rem auto;
+				font-size: .3rem;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div class="zhanwei"></div>
+		<div class="home_big kongge">
+			为保护您的权利不受侵害，并创造优良的互联网社区环境，请您在使用幼圈功能时，遵守《幼趣魔方App幼圈社区管理规则》的各项条例。如您有违规行为，幼趣魔方管理员有权在不告知的情况下，第一时间进行删帖操作，情节严重者会进行封号处理。
+		</div>
+		<p class="home_big">用户在使用幼趣魔方服务过程中，必须遵循以下原则：</p>
+		<div class="home_big">
+			1、不得违反中华人民共和国法律法规及相关国际条约或规则；<br/>
+			2、不得违反与网络服务、幼趣魔方服务有关的网络协议、规定、程序及行业规则；<br/>
+			3、不得上传、展示或传播任何不实虚假、冒充性的、骚扰性的、中伤性的、攻击性的、辱骂性的、恐吓性的、种族歧视性的、诽谤诋毁、泄露隐私、色情淫秽、恶意抄袭、暴力、血腥、自杀、自残的或其他任何非法的信息资料；<br/>
+			4、不得侵犯任何个人、企业事业单位或社会团体的合法权益，包括但不限于专利权、著作权、商标权，或姓名权、名称权、名誉权、荣誉权、肖像权、隐私权等；<br/>
+			5、不得以任何方式损害各级国家机关及政府形象；<br/>
+			6、不得以任何方式损害幼趣魔方运营方及其关联公司的商誉或信誉等合法权益；<br/>
+			7、不得为其他任何非法目的而使用幼圈服务。<br/>
+			8、不得发布商业广告帖；<br/>
+			9、不得散布谣言，捏造事实；<br/>
+			10、禁止发布带有种族，性别歧视的信息。<br/>
+			<br/>
+			如用户在使用微博服务的过程中发现其它用户上传违法侵权等内容，用户可直接点击"举报"按键进行举报，相关人员会尽快核实并进行处理；如涉及姓名权、名称权、名誉权、荣誉权、肖像权、隐私权等人身权益纠纷的处理，用户可依据相关法律法规进行处理；如用户认为上述方法无法解决遇到的问题、或用户觉得有必要向司法行政机关寻求帮助的，用户可尽快向相关机关反馈，幼趣魔方运营方将依法配合司法机关的调查取证工作。
+		</div>
+	</body>
+	
+</html>
